@@ -15,6 +15,7 @@ int main()
     Graph * field = new Graph(length, width, startP, endP);
     queue<Knoten*> notSearched;
     vector<Knoten*> searched;
+    vector<Knoten*> path;
     vector<Knoten*> neighbors = field.getNeighbors(startP[0], startP[1]);
     bool alreadySearched;
     bool pathFound = false;

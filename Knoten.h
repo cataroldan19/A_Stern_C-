@@ -12,6 +12,7 @@ class Knoten
         Knoten(int x, int y, bool startP, bool endP);
         int getX();
         int getY();
+        void setCost(int pCost);
         char getSymbol();
 
     private:
@@ -22,7 +23,7 @@ class Knoten
         bool endPoint;
         bool startPoint;
 
-        int gewicht;
+        int cost;
         //vector<Knoten> Nachbarn;
 
 };
@@ -61,6 +62,10 @@ int Knoten::getY()
 char Knoten::getSymbol()
 {
     return symbol;
+}
+void Knoten::setCost(int pCost)
+{
+    cost = pCost;
 }
 
 //#endif
