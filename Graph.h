@@ -13,18 +13,22 @@ class Graph
     Graph(int l, int w, int start[2], int endP[2]);
     ~Graph();
     //array von Nachbar, mit Parameter x und y in Graph
-    vector<Knoten*> getNeighbors(int x, int y);
+    vector<Knoten*> getNeighbors(Knoten*& k);
+    int getLength();
+    int getWidth();
+    int length;
+    int width;
+    Knoten * startPoint;
+    Knoten * endPoint;
 
     private:
     //array von alle Knoten
     vector<vector<Knoten*>> knoten;
 
 
-    int length;
-    int width;
+    
 
-    int * startPoint;
-    int * endPoint;
+    
 
 };
 
@@ -33,20 +37,21 @@ Graph::Graph(int l, int w, int start[2], int endP[2])
 {
     width = w;
     length = l;
-    startPoint = start;
-    endPoint = endP;
+    
 
     for(int i = 0; i < length; i++)
     {
         knoten.push_back(vector<Knoten*>());
         for(int j = 0; j < width; j++)
         {
-            if(startPoint[0] == j, startPoint[1] == i)
+            if(start[0] == j, start[1] == i)
             {
-                knoten[i].push_back(new Knoten(j, i, true, false));
-            }else if (endPoint[0] == j, endPoint[1] == i)
+		startPoint = new Knoten(j, i, true, false);
+                knoten[i].push_back(startPoint);
+            }else if (endP[0] == j, endP[1] == i)
             {
-                knoten[i].push_back(new Knoten(j, i, false, true));
+		endPoint = new Knoten(j, i, false, true);
+                knoten[i].push_back(endPoint);
             }else
             {
                 knoten[i].push_back(new Knoten(j, i, false, false));
@@ -62,8 +67,11 @@ Graph::~Graph()
     delete endPoint;
 }
 
-vector<Knoten*> Graph::getNeighbors(int x, int y)
+vector<Knoten*> Graph::getNeighbors(Knoten*& k)
 {
+
+    int x = k->getX();
+    int y = k->getY();
     vector<Knoten*> neighbors;
     if(x - 1 > 0)
     {
@@ -80,6 +88,17 @@ vector<Knoten*> Graph::getNeighbors(int x, int y)
     }
 
     return neighbors;
+}
+
+
+int Graph::getLength()
+{
+    return length;
+}
+
+int Graph::getWidth()
+{
+    return width;
 }
 
 //#endif
